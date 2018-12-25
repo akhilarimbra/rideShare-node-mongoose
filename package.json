@@ -2,15 +2,17 @@
   "name": "rideshare",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon --exec 'mocha --recursive -R min'",
+    "start": "nodemon index.j"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
     "mocha": "^5.2.0",
-    "mongoose": "^5.4.0"
+    "mongoose": "^5.4.0",
+    "supertest": "^3.3.0"
   }
 }
