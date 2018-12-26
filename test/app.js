@@ -2,12 +2,12 @@ const assert = require('assert')
 const request = require('supertest')
 const app = require('../app')
 
-describe('The express app', () => {
+describe('express app', () => {
   it('handles a GET request to /api', done => {
     request(app)
       .get('/api')
       .end((error, response) => {
-        assert(response.body.message === 'hello')
+        assert(response.body.hi === 'there')
         done()
       })
   })
