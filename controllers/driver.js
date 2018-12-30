@@ -1,6 +1,22 @@
 const Driver = require('../models/driver')
 
 module.exports = {
+  greeting(req, res) {},
+
+  index(req, res, next) {
+    const { lng, lat } = req.query
+
+    Driver.geoNear(
+      { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
+      {
+        spherical: true,
+        maxDistance: 200000
+      }
+    )
+      .then(drivers => res.send(drivers))
+      .catch(next)
+  },
+
   greeting(req, res) {
     res.send({ hi: 'there' })
   },

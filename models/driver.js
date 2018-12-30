@@ -1,16 +1,14 @@
-const { Schema, model } = require('mongoose')
+const mongoose = require('mongoose')
 
-const DriverSchema = Schema({
-  email: {
-    type: String,
-    unique: true,
-    required: [true, 'Email is required']
-  },
-  driving: {
-    type: Boolean,
-    default: false,
-    required: [true]
-  }
+const PointSchema = mongoose.Schema({
+  type: { type: String, default: 'Point' },
+  coordinates: { type: [Number], index: '2dsphere', required: true }
 })
 
-module.exports = model('Driver', DriverSchema)
+const DriverSchema = mongoose.Schema({
+  email: { type: String, required: [true, 'Email is required'] },
+  driving: { type: Boolean, default: false, required: [true] },
+  geometry: PointSchema
+})
+
+module.exports = mongoose.model('drivers', DriverSchema)

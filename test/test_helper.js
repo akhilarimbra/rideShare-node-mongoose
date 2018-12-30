@@ -9,11 +9,12 @@ before(done => {
     })
 })
 
-// beforeEach(done => {
-//   const { drivers } = mongoose.connection.collection
-//   drivers
-//     .drop()
-//     .then(() => done())
-//     .catch(error => done(error))
-//   console.log(mongoose.connection.collections)
-// })
+beforeEach(done => {
+  const { drivers } = mongoose.connection.collections
+  drivers
+    .drop()
+    .then(() => drivers.ensureIndex({ 'geometry.coordinates': '2dsphere' }))
+    .then(() => done())
+    .catch(error => done(error))
+  console.log(mongoose.connection.collections)
+})
